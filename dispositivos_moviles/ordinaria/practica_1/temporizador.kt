@@ -1,11 +1,28 @@
 fun main() { 
-    print("Ingresa el tiempo en HH:MM:SS: ")
-    // read the time
-    val time = readLine()!!.split(":").map { it.toInt() }
-    // destructuring time
-    var hours = time[0]
-    var min = time[1]
-    var sec = time[2]
+    var hours: Int
+    var min: Int
+    var sec: Int
+    while (true) {
+        try {
+            // read the time
+            print("Ingresa el tiempo en HH:MM:SS: ")
+            val time = readLine()!!.split(":").map { it.toInt() }
+            // destructuring time
+            hours = time[0]
+            min = time[1]
+            sec = time[2]
+            // validate time
+            if (hours < 0 || min < 0 || sec < 0 || time.size != 3 || min > 59 || sec > 59) {
+                throw Exception("El valor ingresado no es válido")
+            }
+            // sounds good 
+            break
+        }
+        catch(e: Exception) {
+            println("El valor ingresado no es válido")
+        }
+    }
+    
 
     while (hours >= 0) {
         while (min >= 0) {
