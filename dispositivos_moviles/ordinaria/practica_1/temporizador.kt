@@ -1,5 +1,3 @@
-// make a temporizer that prints the time in minutes and seconds
-
 fun main() { 
     print("Ingresa el tiempo en HH:MM:SS: ")
     // read the time
