@@ -1,0 +1,25 @@
+// Por medio de la utilidad máxima
+Inicio
+// m -> cantidad de objetos
+// q -> capacidad de la mochila
+int peso = 0;
+Objetos[m] = [
+    {
+        "peso": 2,
+        "beneficio": 3
+    }
+]
+mochila = [];
+
+while (peso <= q) {
+    objeto = encontrar_maximo_beneficio(Objetos[m]);
+    if (peso + objeto.peso <= q) {
+        peso += objeto.peso;
+        mochila.agregar_objeto(objeto);
+    } else {
+        break;
+    }
+}
+
+return mochila
+Fin

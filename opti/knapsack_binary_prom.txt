@@ -1,0 +1,35 @@
+// Promediando Beneficio / peso
+
+Inicio
+// m -> cantidad de objetos
+// q -> capacidad de la mochila
+int peso = 0;
+Objetos[m] = [
+    {
+        "peso": 2,
+        "beneficio": 3
+    }
+]
+mochila = [];
+while (peso <= q) {
+    maximo = max(Objetos);
+    if (peso + Objetos[maximo].peso <= q) {
+        mochila.push(Objetos[maximo]);
+        peso += Objetos[maximo].peso;
+    }
+}
+    
+return mochila;
+Fin
+
+
+
+def max(Objetos) {
+    maximo = 0;
+    for (i = 0; i < Objetos.length; i++) {
+        if (Objetos[i].beneficio / Objetos[i].peso > maximo) {
+            maximo = Objetos[i].beneficio / Objetos[i].peso;
+        }
+    }
+    return maximo;
+}
