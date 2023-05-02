@@ -7,7 +7,7 @@ with open("input.txt", "r") as f:
     node_coords = np.zeros((num_nodes, 2))
     for i in range(num_nodes):
         node_info = lines[i+3].split()
-        node_coords[int(node_info[0])-1] = [float(node_info[1]), float(node_info[2])]
+        node_coords[i] = [float(node_info[1]), float(node_info[2])]
 
 # Cálculo de la matriz de distancias entre todos los nodos
 dist_matrix = np.zeros((num_nodes, num_nodes))
