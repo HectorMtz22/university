@@ -1,6 +1,23 @@
 import numpy as np
 import fileinput
 
+# Colores ANSI
+COLOR_RED = '\033[91m'
+COLOR_GREEN = '\033[92m'
+COLOR_BLUE = '\033[94m'
+COLOR_RESET = '\033[0m'
+
+def printTSP(names, nodes, cost):
+    for node in nodes[:-1]:
+        name = names[node]
+        print(name, end=" -> ")
+
+    print(names[nodes[-1]])
+
+
+    print(COLOR_RED + "Costo total:", COLOR_RESET, cost)
+
+
 # loop through all lines
 lines = []
 for line in fileinput.input():
@@ -23,7 +40,7 @@ for i in range(num_nodes):
         dist_matrix[j][i] = dist_matrix[i][j]
 
 # Algoritmo del vecino más cercano
-print("Algoritmo")
+print(COLOR_GREEN + "Algoritmo vecino mas cercano" + COLOR_RESET)
 visited = [np.random.randint(num_nodes)]
 print("El primer nodo es: ", node_names[visited[0]])
 while len(visited) < num_nodes:
@@ -34,6 +51,8 @@ while len(visited) < num_nodes:
             min_dist = dist_matrix[last_node][i]
             next_node = i
     visited.append(next_node)
+    print("El nodo", node_names[next_node], "es el mas cercano. Lo agregamos")
+
 tour = visited + [visited[0]]
 
 # Cálculo del costo total del recorrido
@@ -41,6 +60,11 @@ cost = 0
 for i in range(num_nodes):
     cost += dist_matrix[tour[i]][tour[i+1]]
 
+print(COLOR_BLUE + "Ruta con algoritmo mas cercano" + COLOR_RESET)
+printTSP(node_names, tour, cost)
+
+
+print("\n Mejora 2-opt")
 # Aplicación de la mejora 2-opt
 improved = True
 while improved:
@@ -52,9 +76,11 @@ while improved:
             for k in range(num_nodes):
                 new_cost += dist_matrix[new_tour[k]][new_tour[k+1]]
             if new_cost < cost:
+                print("Mejora intercambiando", node_names[tour[i]], node_names[tour[j]])
                 tour = new_tour
                 cost = new_cost
                 improved = True
+                printTSP(node_names, tour, cost)
                 break
         if improved:
             break
@@ -62,12 +88,5 @@ while improved:
 # Impresión del tour y su costo
 # print("Tour TSP:", tour)
 
-print("\nRuta TSP")
-for node in tour[:-1]:
-    name = node_names[node]
-    print(name, end=" -> ")
-
-print(node_names[tour[-1]])
-
-
-print("Costo total:", cost)
+print(COLOR_BLUE + "\nRuta final encontrada por el algoritmo" + COLOR_RESET)
+printTSP(node_names, tour, cost)
