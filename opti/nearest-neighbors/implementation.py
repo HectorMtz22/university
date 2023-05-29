@@ -1,13 +1,19 @@
 import numpy as np
+import fileinput
+
+# loop through all lines
+lines = []
+for line in fileinput.input():
+    lines.append(line)
 
 # Lectura de datos de entrada desde el archivo
-with open("input.txt", "r") as f:
-    lines = f.readlines()
-    num_nodes = int(lines[0].split()[1])
-    node_coords = np.zeros((num_nodes, 2))
-    for i in range(num_nodes):
-        node_info = lines[i+3].split()
-        node_coords[i] = [float(node_info[1]), float(node_info[2])]
+num_nodes = int(lines[0].split()[1])
+node_coords = np.zeros((num_nodes, 2))
+node_names = []
+for i in range(num_nodes):
+    node_info = lines[i+3].split()
+    node_names.append(node_info[0])
+    node_coords[i] = [float(node_info[1]), float(node_info[2])]
 
 # Cálculo de la matriz de distancias entre todos los nodos
 dist_matrix = np.zeros((num_nodes, num_nodes))
@@ -17,7 +23,9 @@ for i in range(num_nodes):
         dist_matrix[j][i] = dist_matrix[i][j]
 
 # Algoritmo del vecino más cercano
+print("Algoritmo")
 visited = [np.random.randint(num_nodes)]
+print("El primer nodo es: ", node_names[visited[0]])
 while len(visited) < num_nodes:
     last_node = visited[-1]
     min_dist = float("inf")
@@ -52,5 +60,14 @@ while improved:
             break
 
 # Impresión del tour y su costo
-print("Tour TSP:", tour)
+# print("Tour TSP:", tour)
+
+print("\nRuta TSP")
+for node in tour[:-1]:
+    name = node_names[node]
+    print(name, end=" -> ")
+
+print(node_names[tour[-1]])
+
+
 print("Costo total:", cost)
