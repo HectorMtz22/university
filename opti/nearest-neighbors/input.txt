@@ -1,14 +1,18 @@
-NODES 10
+NODES 14
 
 NODE_COORD
-A 2.5 7.1
-B 4.8 1.2
-C 3.3 4.9
-D 5.5 8.2
-E 1.1 5.6
-F 6.3 3.8
-G 2.9 1.1
-H 7.0 7.0
-I 4.2 3.7
-J 1.9 2.2
+FerreteriaSantiago 0 0
+Doal 0 1
+ElTornillo 2 8
+Silva -3 2
+x1 3 -16
+x2 -1 -3
+x3 -14 10
+x4 15 -6
+x5 2 -10
+x6 10 0
+x7 9 6
+x8 11 -5
+x9 18 19
+x10 6 5
 
