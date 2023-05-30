@@ -1,0 +1,28 @@
+// pseudocodigo de algoritmo del vecino mas cercano 
+Inicio
+Lee el archivo .txt o .csv
+Obtiene las dimensiones
+Obtiene los nodos
+
+Crea matriz de distancias
+
+Se selecciona un nodo al azar
+Por cada nodo
+    Obtiene la distancia entre el nodo anterior y los demas nodos
+    Selecciona el nodo mas cercano
+    Se agrega el nodo seleccionado a la ruta
+
+Se calcula el costo total de la ruta
+Se muestra la ruta
+
+// mejora 2-opt
+Por cada nodo (excepto el primero y el último) i
+    Por cada nodo (excepto el primero y el último) j
+        Se intercambian los nodos "i" y "j"
+        Se calcula el costo de la ruta
+        Si el costo es menor al costo anterior
+            Se guarda el costo
+            Se guarda la ruta
+    Se muestra la ruta
+    
+Fin
