@@ -1,5 +1,6 @@
 import numpy as np
 import fileinput
+import sys
 
 # Colores ANSI
 COLOR_RED = '\033[91m'
@@ -22,6 +23,10 @@ def printTSP(names, nodes, cost):
 lines = []
 isThereNodes = False
 num_nodes = 0
+
+print("Recuerda que se ejecuta poniendo en los argumentos el .txt o .csv")
+print("Si tienes un derivado de UNIX, puedes poner el archivo como stdin '<'")
+
 for line in fileinput.input():
     if (isThereNodes):
         lines.append(line)
