@@ -30,7 +30,10 @@ for line in fileinput.input():
             isThereNodes = True
         
         if line.startswith("DIMENSION"):
-            num_nodes = int(line.split(',')[1])
+            args = line.split(',')
+            for arg in args:
+                if arg.strip().isdigit():
+                    num_nodes = int(arg)
 
 # Lectura de datos de entrada desde el archivo
 # num_nodes = int(lines[0].split(',')[1])
