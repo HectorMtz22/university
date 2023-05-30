@@ -71,7 +71,10 @@ for i in range(num_nodes):
 fig, ax = plt.subplots()
 
 # Graficar los puntos en el plano cartesiano
-ax.plot(x, y, 'o')
+for i in range(len(x)):
+    ax.plot(x[i], y[i], 'o')
+    ax.annotate(node_names[i], (x[i], y[i]), textcoords="offset points", xytext=(0,10), ha='center')
+
 
 # Configurar los límites de los ejes
 ax.set_xlim([min(x) - 1, max(x) + 1])
