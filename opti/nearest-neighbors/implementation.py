@@ -20,15 +20,24 @@ def printTSP(names, nodes, cost):
 
 # loop through all lines
 lines = []
+isThereNodes = False
+num_nodes = 0
 for line in fileinput.input():
-    lines.append(line)
+    if (isThereNodes):
+        lines.append(line)
+    else:
+        if line.startswith("NODE_COORD_SECTION"):
+            isThereNodes = True
+        
+        if line.startswith("DIMENSION"):
+            num_nodes = int(line.split(',')[1])
 
 # Lectura de datos de entrada desde el archivo
-num_nodes = int(lines[0].split()[1])
+# num_nodes = int(lines[0].split(',')[1])
 node_coords = np.zeros((num_nodes, 2))
 node_names = []
 for i in range(num_nodes):
-    node_info = lines[i+3].split()
+    node_info = lines[i].split(',')
     node_names.append(node_info[0])
     node_coords[i] = [float(node_info[1]), float(node_info[2])]
 
