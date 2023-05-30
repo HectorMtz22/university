@@ -2,7 +2,7 @@ import numpy as np
 import fileinput
 import sys
 import matplotlib.pyplot as plt
-
+import networkx as nx
 # Colores ANSI
 COLOR_RED = '\033[91m'
 COLOR_GREEN = '\033[92m'
@@ -139,4 +139,24 @@ print(COLOR_BLUE + "\nRuta final encontrada por el algoritmo" + COLOR_RESET)
 printTSP(node_names, tour, cost)
 
 # Mostrar el plano cartesiano
+plt.show()
+
+
+# Crear un grafo dirigido
+G = nx.DiGraph()
+
+# Agregar los nodos en el orden del array
+G.add_nodes_from(tour)
+
+# Agregar arcos en el orden del array
+for i in range(len(tour) - 1):
+    G.add_edge(tour[i], tour[i+1])
+
+# Posiciones de los nodos en el plano
+pos = nx.spring_layout(G)
+
+# Dibujar el grafo dirigido
+nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_color='gray', arrowsize=20, node_size=1000)
+
+# Mostrar el grafo
 plt.show()
