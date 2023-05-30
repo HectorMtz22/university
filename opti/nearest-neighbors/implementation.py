@@ -1,12 +1,15 @@
 import numpy as np
 import fileinput
 import sys
+import matplotlib.pyplot as plt
 
 # Colores ANSI
 COLOR_RED = '\033[91m'
 COLOR_GREEN = '\033[92m'
 COLOR_BLUE = '\033[94m'
 COLOR_RESET = '\033[0m'
+
+
 
 def printTSP(names, nodes, cost):
     for node in nodes[:-1]:
@@ -40,6 +43,11 @@ for line in fileinput.input():
                 if arg.strip().isdigit():
                     num_nodes = int(arg)
 
+
+# Datos para Matplotlib
+x = []
+y = []
+
 # Lectura de datos de entrada desde el archivo
 # num_nodes = int(lines[0].split(',')[1])
 node_coords = np.zeros((num_nodes, 2))
@@ -48,6 +56,8 @@ for i in range(num_nodes):
     node_info = lines[i].split(',')
     node_names.append(node_info[0])
     node_coords[i] = [float(node_info[1]), float(node_info[2])]
+    x.append(float(node_info[1]))
+    y.append(float(node_info[2]))
 
 # Cálculo de la matriz de distancias entre todos los nodos
 dist_matrix = np.zeros((num_nodes, num_nodes))
@@ -55,6 +65,25 @@ for i in range(num_nodes):
     for j in range(i+1, num_nodes):
         dist_matrix[i][j] = np.linalg.norm(node_coords[i] - node_coords[j])
         dist_matrix[j][i] = dist_matrix[i][j]
+
+
+# Crear la figura y los ejes
+fig, ax = plt.subplots()
+
+# Graficar los puntos en el plano cartesiano
+ax.plot(x, y, 'o')
+
+# Configurar los límites de los ejes
+ax.set_xlim([min(x) - 1, max(x) + 1])
+ax.set_ylim([min(y) - 1, max(y) + 1])
+
+# Etiquetar los ejes
+ax.set_xlabel('Eje X')
+ax.set_ylabel('Eje Y')
+
+# Mostrar la cuadrícula
+ax.grid(True)
+
 
 # Algoritmo del vecino más cercano
 print(COLOR_GREEN + "Algoritmo vecino mas cercano" + COLOR_RESET)
@@ -107,3 +136,6 @@ while improved:
 
 print(COLOR_BLUE + "\nRuta final encontrada por el algoritmo" + COLOR_RESET)
 printTSP(node_names, tour, cost)
+
+# Mostrar el plano cartesiano
+plt.show()
