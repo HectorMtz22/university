@@ -9,8 +9,6 @@ COLOR_GREEN = '\033[92m'
 COLOR_BLUE = '\033[94m'
 COLOR_RESET = '\033[0m'
 
-
-
 def printTSP(names, nodes, cost):
     for node in nodes[:-1]:
         name = names[node]
